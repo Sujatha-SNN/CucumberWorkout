@@ -134,7 +134,7 @@ public class CarWale {
 	@Given("Go to Wishlist and Click on More Details")
 	public void goToWishlistAndClickOnMoreDetails() {
 		driver.findElementByXPath("//li[@data-role='click-tracking']").click();
-		driver.findElementByXPath("//a[text()='More details »']").click();
+		driver.findElementByXPath("//a[text()='More details Â»']").click();
 
 	}
 
@@ -163,10 +163,9 @@ public class CarWale {
 		System.out.println("\n");
 		for (int i = 0; i < liRows.size(); i++) {
 			k = k + 1;
-			System.out.print(liRows.get(i).findElement(By.xpath("(//div[@class='equal-width text-light-grey'])[" + k + "]")).getText()
-					+ "      " + "      " + "      " + liRows.get(i).findElement(By.xpath("(//div[@class='equal-width dark-text'])[" + k + "]")).getText());
-			System.out.println("\n");
-		}
+			System.out.printf("%-20s %30s %n",liRows.get(i).findElement(By.xpath("(//div[@class='equal-width text-light-grey'])[" + k + "]")).getText()
+					, liRows.get(i).findElement(By.xpath("(//div[@class='equal-width dark-text'])[" + k + "]")).getText());
+			}
 		Thread.sleep(3000);
 
 		
