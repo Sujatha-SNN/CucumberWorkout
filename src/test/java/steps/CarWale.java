@@ -154,7 +154,7 @@ public class CarWale {
 		List<WebElement> headerElements = ulElement.findElements(By.tagName("li"));
 
 		for (WebElement header : headerElements) {
-			System.out.print(header.getText() + "      ");
+			System.out.printf("%-20s %20s",header.getText()," ");
 
 		}
 		List<WebElement> liRows = driver.findElementsByXPath("//div[@class='overview-list padding-bottom10']//li");
