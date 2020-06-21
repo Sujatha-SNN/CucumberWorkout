@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebElement;
@@ -20,6 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 
 public class Trivago {
 	ChromeDriver driver;
@@ -200,6 +200,11 @@ public class Trivago {
 		selRoom.selectByValue("1");
 		driver.findElementByXPath("//div[@class='hprt-reservation-cta']/button").click();
 
+	}
+	
+	@Then("Quit the browser")
+	public void closeBrowser() {
+		driver.close();
 	}
 
 }

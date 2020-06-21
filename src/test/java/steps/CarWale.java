@@ -19,7 +19,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -76,7 +75,8 @@ public class CarWale {
 	}
 
 	@Given("Select Manufacturer as {string} --> Creta")
-	public void selectManufacturerAsCreta(String string) {
+	public void selectManufacturerAsCreta(String string) throws InterruptedException {
+		Thread.sleep(2000);
 		driver.findElementByXPath("//li[@data-manufacture-en='Hyundai']").click();
 		driver.findElementByXPath("(//li[@class=\"us-sprite rootLi\"])[1]").click();
 	}
@@ -134,7 +134,7 @@ public class CarWale {
 	@Given("Go to Wishlist and Click on More Details")
 	public void goToWishlistAndClickOnMoreDetails() {
 		driver.findElementByXPath("//li[@data-role='click-tracking']").click();
-		driver.findElementByXPath("//a[text()='More details Â»']").click();
+		driver.findElementByXPath("//a[text()='More details »']").click();
 
 	}
 
@@ -157,6 +157,7 @@ public class CarWale {
 			System.out.printf("%-20s %20s",header.getText()," ");
 
 		}
+		
 		List<WebElement> liRows = driver.findElementsByXPath("//div[@class='overview-list padding-bottom10']//li");
 		Thread.sleep(3000);
 		int k = 0;
@@ -165,8 +166,9 @@ public class CarWale {
 			k = k + 1;
 			System.out.printf("%-20s %30s %n",liRows.get(i).findElement(By.xpath("(//div[@class='equal-width text-light-grey'])[" + k + "]")).getText()
 					, liRows.get(i).findElement(By.xpath("(//div[@class='equal-width dark-text'])[" + k + "]")).getText());
-			}
-		Thread.sleep(3000);
+			System.out.println("\n");
+		}
+
 
 		
 	}

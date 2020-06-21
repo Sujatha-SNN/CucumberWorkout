@@ -15,7 +15,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 
 public class Shein {
 	ChromeOptions options;
@@ -38,6 +40,11 @@ public class Shein {
 		driver = new ChromeDriver(options);	    
 	}
 
+	@Given("Load {string}")
+	public void loadHttpsWwwSheinCom(String string) {
+		driver.get(string);
+	}
+	
 	@Given("Maximize the brower")
 	public void maximizeTheBrower() {
 		driver.manage().window().maximize();
@@ -49,44 +56,42 @@ public class Shein {
 	}
 
 	
-	@Given("Load {string}")
-	public void load(String string) {
-		driver.get(string);
-	}
+	
 
-	@Given("Mouseover on Clothing and click Jeans")
+	@And("Mouseover on Clothing and click Jeans")
 	public void mouseoverOnClothingAndClickJeans() throws InterruptedException {
 		Thread.sleep(2000);
 		build = new Actions(driver);
 		js = (JavascriptExecutor) driver;
+		driver.findElementByXPath("//div[@class='close-popup']").click();;
 		WebElement popup = driver.findElementByXPath("//div[@class='c-coupon-box']//i[1]");
 		js.executeScript("arguments[0].click();", popup);
 		// driver.switchTo().defaultContent();
 		build.moveToElement(driver.findElementByXPath("//a[@title='CLOTHING'][1]")).build().perform();
 		Thread.sleep(1000);
-		build.moveToElement(driver.findElementByXPath("(//a[@title='Jeans'])[1]")).click().build().perform();
+		build.click(driver.findElementByXPath("(//a[@title='Jeans'])[1]")).build().perform();
 	}
 
-	@Given("Choose Black under Jeans product count")
+	@And("Choose Black under Jeans product count")
 	public void chooseBlackUnderJeansProductCount() {
 		driver.findElementByXPath("//div[@class='header-label ']/span/a[text()='Black']").click();
 	}
 
-	@Given("Check size as medium")
+	@And("Check size as medium")
 	public void checkSizeAsMedium() {
 		driver.findElementByXPath("//span[text()='Size']/following-sibling::i").click();
 		WebElement size = driver.findElementByXPath("(//span[@class='attr-check-box']/i)[9]");
 		js.executeScript("arguments[0].click();", size);
 	}
 
-	@Given("Click + in color")
+	@And("Expand color")
 	public void clickInColor() throws InterruptedException {
 		Thread.sleep(1000);
 		driver.findElementByXPath("//span[text()='Color']/following-sibling::i").click();
 
 	}
 
-	@Given("Check whether the color is black")
+	@And("Check whether the color is black")
 	public void checkWhetherTheColorIsBlack() throws InterruptedException {
 		String color = driver.findElementByXPath("(//a[@class='j-auto-attrlink']/span)[5]").getText();
 
@@ -96,7 +101,7 @@ public class Shein {
 		Thread.sleep(1000);
 	}
 
-	@Given("Click first item to Add to Bag")
+	@And("Click first item to Add to Bag")
 	public void clickFirstItemToAddToBag() throws InterruptedException {
 		WebElement firstItem = driver
 				.findElement(By.xpath("(//img[@class='c-goodsitem__secimg j-goodsitem__secimg'])[1]"));
@@ -108,14 +113,14 @@ public class Shein {
 
 	}
 
-	@Given("Click the size as M abd click Submit")
+	@And("Click the size as M abd click Submit")
 	public void clickTheSizeAsMAbdClickSubmit() {
 		driver.findElementByXPath("//span[@class='inner' and text()[normalize-space()='M']]").click();
 		driver.findElementByXPath("(//button[@class='she-btn-black she-btn-xl'])[1]").click();
 		
 	}
 
-	@Given("Click view Bag")
+	@And("Click view Bag")
 	public void clickViewBag() throws InterruptedException {
 		Thread.sleep(1000);
 		build.moveToElement(driver.findElementByXPath("//i[@class='iconfont-critical icon-gouwudai']")).build().perform();
@@ -123,7 +128,7 @@ public class Shein {
 		Thread.sleep(1000);
 	}
 
-	@Given("Check the size is Medium or not.")
+	@And("Check the size is Medium or not.")
 	public void checkTheSizeIsMediumOrNot() {
 		String sizeInBag = driver.findElementByXPath("//span[@class='gd-size']/em").getText();
 		if(sizeInBag.equalsIgnoreCase("M"))
@@ -131,4 +136,11 @@ public class Shein {
 
 
 	}
+	
+	@Then("Close browser")
+	public void closeBrowser() {
+		driver.close();
+	}
+	
 }
+

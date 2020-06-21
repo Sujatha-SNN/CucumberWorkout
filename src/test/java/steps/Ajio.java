@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -44,7 +45,7 @@ public class Ajio {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
-	@Given("MouseOver on Women,Categories")
+	@And("MouseOver on Women,Categories")
 	public void mouseoverOnWomenCategories() throws InterruptedException {
 		driver.findElementByXPath("//a[@href='/shop/women']").click();
 		Thread.sleep(3000);
@@ -60,19 +61,19 @@ public class Ajio {
 		
 	}
 
-	@Given("Click on Kurtas")
+	@And("Click on Kurtas")
 	public void clickOnKurtas() {
 		driver.findElementByXPath("(//a[text()='Kurtas'])[2]").click();
 	}
 
-	@Given("Select Ajio Brand")
+	@And("Select Ajio Brand")
 	public void selectAjioBrand() {
 		driver.findElementByXPath("//span[text()='brands']").click();
 		driver.findElementByXPath("//label[@for='AJIO']").click();
 		
 	}
 
-	@Given("Check all the Kurtas are Ajio Brand")
+	@And("Check all the Kurtas are Ajio Brand")
 	public void checkAllTheKurtasAreAjioBrand() {
 		List<WebElement> ajiokurtas = driver.findElementsByXPath("//div[@class='ReactVirtualized__Grid__innerScrollContainer']/div");
 		System.out.println(ajiokurtas.size());
@@ -86,14 +87,14 @@ public class Ajio {
 		}
 	}
 
-	@Given("Sort the results based on Discount")
+	@And("Sort the results based on Discount")
 	public void sortTheResultsBasedOnDiscount() {
 		WebElement selectSortBy = driver.findElementByXPath("//div[@class='filter-dropdown']/select");
 		Select selSrt = new Select(selectSortBy);
 		selSrt.selectByValue("discount-desc");
 	}
 
-	@Given("Select Blue Color and add the first kurta to bag")
+	@And("Select Blue Color and add the first kurta to bag")
 	public void selectBlueColorAndAddTheFirstKurtaToBag() throws InterruptedException {
 		driver.findElementByXPath("//span[text()='colors']").click();
 		JavascriptExecutor js = (JavascriptExecutor)driver;
@@ -110,18 +111,18 @@ public class Ajio {
 		driver.findElementByXPath("//span[text()='ADD TO BAG']").click();
 	}
 
-	@Given("Verify the error message for skipping size selection")
+	@And("Verify the error message for skipping size selection")
 	public void verifyTheErrorMessageForSkippingSizeSelection() {
 		System.out.println(driver.findElement(By.xpath("//span[@class='edd-pincode-msg-details']")).getText());
 	}
 
-	@Given("Select size and add the kurta to bag")
+	@And("Select size and add the kurta to bag")
 	public void selectSizeAndAddTheKurtaToBag() {
 		driver.findElementByXPath("(//div[@class='circle size-variant-item size-instock '])[2]").click();
 		driver.findElementByXPath("//span[text()='ADD TO BAG']").click();
 	}
 
-	@Given("Enter pin-code for estimated delivery")
+	@And("Enter pin-code for estimated delivery")
 	public void enterPinCodeForEstimatedDelivery() throws InterruptedException {
 		js=(JavascriptExecutor)driver;
 		js.executeScript("window.scrollBy(0,300)");
@@ -131,7 +132,7 @@ public class Ajio {
 
 	}
 
-	@Given("Enter pincode as {int} and click Confirm pincode")
+	@And("Enter pincode as {int} and click Confirm pincode")
 	public void enterPincodeAsAndClickConfirmPincode(Integer int1) {
 		driver.findElementByXPath("//input[@name='pincode']").sendKeys(String.valueOf(int1));
 		driver.findElementByXPath("//button[@class='edd-pincode-modal-submit-btn']").click();

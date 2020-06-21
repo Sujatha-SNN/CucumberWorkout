@@ -1,15 +1,12 @@
 Feature: Shop on ShopClues.com under Women category
 
-Background:
+Scenario: TC001_ShopClues.com for shoes under Women Casual Wear shoes
 
 Given Set browser and other properties
 Given Open the chrome browser 
 Given Load https://www.shopclues.com/ 
 Given Maximize brower  
 Given Apply wait
-
-Scenario: TC001_ShopClues.com for shoes under Women Casual Wear shoes
-
 And Mouseover on women and click Casual Shoes
 And Select Color as Black
 And Check whether the product name contains the word black

@@ -16,4 +16,4 @@ And Print the Hotel name, Rating, Number of Reviews and Click View Deal
 And Print the URL of the Page 
 And Print the Price of the Room and click Choose Your Room
 And Click Reserve and I'll Reserve
-Then Close the browser
+Then Quit the browser

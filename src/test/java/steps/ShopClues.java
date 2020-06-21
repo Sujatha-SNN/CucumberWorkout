@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -58,13 +59,13 @@ public class ShopClues {
 
 	}
 
-	@Given("Mouseover on women and click Casual Shoes")
+	@And("Mouseover on women and click Casual Shoes")
 	public void mouseoverOnWomenAndClickCasualShoes() throws InterruptedException {
 		Thread.sleep(2000);
 		driver.findElementByXPath("//button[@class='moe-chrome-style-notification-btn moe-btn-close moe-block-class']")
 				.click();
 		Actions build = new Actions(driver);
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//JavascriptExecutor js = (JavascriptExecutor) driver;
 		Thread.sleep(2000);
 		build.moveToElement(driver.findElementByLinkText("WOMEN")).build().perform();
 		Thread.sleep(2000);
@@ -72,7 +73,7 @@ public class ShopClues {
 
 	}
 
-	@Given("Select Color as Black")
+	@And("Select Color as Black")
 	public void selectColorAsBlack() throws InterruptedException {
 		Set<String> windowHandles = driver.getWindowHandles();
 		List<String> windowsList = new ArrayList<String>(windowHandles);
@@ -86,7 +87,7 @@ public class ShopClues {
 		Thread.sleep(1000);
 	}
 
-	@Given("Check whether the product name contains the word black")
+	@And("Check whether the product name contains the word black")
 	public void checkWhetherTheProductNameContainsTheWordBlack() {
 		productList = driver.findElementsByXPath("//span[@class='prod_name ']");
 		System.out.println("products count" + productList.size());
@@ -102,7 +103,7 @@ public class ShopClues {
 
 	}
 
-	@Given("If so, add the product name and price in to Map")
+	@And("If so, add the product name and price in to Map")
 	public void ifSoAddTheProductNameAndPriceInToMap() {
 		if (flag) {
 			for (int i = 0; i < productList.size(); i++) {
@@ -117,7 +118,7 @@ public class ShopClues {
 
 	}
 
-	@Given("Check Display the count of shoes which are more than {int} rupees")
+	@And("Check Display the count of shoes which are more than {int} rupees")
 	public void checkDisplayTheCountOfShoesWhichAreMoreThanRupees(Integer int1) throws InterruptedException {
 		driver.findElementByXPath("//label[@for='Rs. 500 - Rs. 999']").click();
 		String moreThan500Count = driver.findElementByXPath("//div[@class='product_found']/span").getText();
@@ -126,7 +127,7 @@ public class ShopClues {
 
 	}
 
-	@Given("Click the highest price of the 'shoe")
+	@And("Click the highest price of the 'shoe")
 	public void clickTheHighestPriceOfTheShoe() {
 		List<Integer> priceList = new ArrayList<Integer>();
 		List<WebElement> above500ProductRows = driver
@@ -154,7 +155,7 @@ public class ShopClues {
 
 	}
 
-	@Given("Get the current page URL and check with the product ID")
+	@And("Get the current page URL and check with the product ID")
 	public void getTheCurrentPageURLAndCheckWithTheProductID() {
 
 		Set<String> wHandlesforSelProd = driver.getWindowHandles();
@@ -168,12 +169,12 @@ public class ShopClues {
 		System.out.println(currentUrl);
 	}
 
-	@Given("Copy the offercode")
+	@And("Copy the offercode")
 	public void copyTheOffercode() {
 		System.out.println("OFFER CODE" + driver.findElementById("first__B2G75"));
 	}
 
-	@Given("Select size, color and click ADD TO CART")
+	@And("Select size, color and click ADD TO CART")
 	public void selectSizeColorAndClickADDTOCART() throws InterruptedException {
 		driver.findElementByXPath("(//span[@class='variant var '])[1]").click();
 		Thread.sleep(2000);
@@ -183,14 +184,15 @@ public class ShopClues {
 		Thread.sleep(2000);
 	}
 
-	@Given("Mouse over on Shopping cart and click View Cart")
+	@And("Mouse over on Shopping cart and click View Cart")
 	public void mouseOverOnShoppingCartAndClickViewCart() throws InterruptedException {
-		build.moveToElement(driver.findElementByXPath("//a[@class='cart_ic']")).perform();
+		Actions build = new Actions(driver);
+		build.moveToElement(driver.findElementByXPath("//a[@class='cart_ic']")).build().perform();
 		Thread.sleep(1000);
 		driver.findElementByXPath("//a[text()='View Cart']").click();
 	}
 
-	@Given("Type Pincode as {int} click Submit and Place Order")
+	@And("Type Pincode as {int} click Submit and Place Order")
 	public void typePincodeAsClickSubmitAndPlaceOrder(Integer int1) {
 		driver.findElementById("pin_code_popup").sendKeys("600016");
 		driver.findElementById("get_pincode_popup").click();
