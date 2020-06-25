@@ -76,20 +76,20 @@ public class Lenskart extends BaseClass {
 
 	@Given("Type your name in User's name")
 	public void typeYourNameInUserSName() {
-	driver.findElementById("example-text-input").sendKeys("Nethra");
-}
+		driver.findElementById("example-text-input").sendKeys("Nethra");
+	}
 
-@Then("click Save and continue")
-public void clickSaveAndContinue() throws InterruptedException {
-	Thread.sleep(1000);
-	driver.findElementByXPath("(//button[@unbxdattr='AddToCart'])[1]").click();
-}
+	@Then("click Save and continue")
+	public void clickSaveAndContinue() throws InterruptedException {
+		Thread.sleep(1000);
+		driver.findElementByXPath("(//button[@unbxdattr='AddToCart'])[1]").click();
+	}
 
-@Then("Print total amount and click Proceed to Checkout")
-public void printTotalAmountAndClickProceedToCheckout() {
-	String totalCost = driver.findElementByXPath("//span[@class='span6']/following-sibling::span").getText();
-	System.out.println("totalCost"+totalCost);
-	driver.findElementByXPath("//span[text()='Proceed To Checkout']/parent::a").click();
-	
-}
+	@Then("Print total amount and click Proceed to Checkout")
+	public void printTotalAmountAndClickProceedToCheckout() {
+		String totalCost = driver.findElementByXPath("//span[@class='span6']/following-sibling::span").getText();
+		System.out.println("totalCost" + totalCost);
+		driver.findElementByXPath("//span[text()='Proceed To Checkout']/parent::a").click();
+
+	}
 }
