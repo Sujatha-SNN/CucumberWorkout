@@ -91,30 +91,41 @@ public class BikeWale {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	@Then("Find and print the maximum overall rating of all the bikes")
-	public void findAndPrintTheMaximumOverallRatingOfAllTheBikes() {
-		WebElement row = driver.findElementByXPath("(//table[@class='table-content'])[6]//tr[2]");
-		List<WebElement> cols = row.findElements(By.xpath("//td/div[@class=\"rating-block\"]"));
-		bikeRating = new TreeMap<String,String>();
-		int i=0;
-		for (WebElement col : cols) {
-			i = i+1;
-			WebElement rating = driver.findElement(By.xpath("(//span[@class='font20 font-bold'])["+ i + "]"));
-			String bike = col.findElement(By.xpath("(//div[@class='rating-block']/following-sibling::a)[" + i +"]")).getAttribute("href");
-			if(bike.contains("royalenfield"))
-				bikeRating.put(rating.getText(),"Royal Enfield");
-			else if(bike.contains("jawa-bikes"))
-				bikeRating.put(rating.getText(), "Jawa");
-			else if(bike.contains("kawasaki-bikes"))
-				bikeRating.put(rating.getText(), "Kawasaki");
-		}
-	
-	}
-
 	@Then("Print the max rating")
 	public void printTheMaxRating() {
-		System.out.println(bikeRating);
+		/*done on the assumption,rating will be unique
+		 * System.out.println(bikeRating);
 		List<String> keyList = new ArrayList<String>(bikeRating.keySet());
-		System.out.println(bikeRating.get(keyList.get(keyList.size()-1)));
+		System.out.println(bikeRating.get(keyList.get(keyList.size()-1)));*/
+		
+		System.out.println(bikeRating);//before sorting //bikerating is map -use urs
+		Map<String, String> sortByValues = sortByValues(bikeRating);
+		Collection<String> values = sortByValues.values();
+		List<String> list= new ArrayList<String>(values);
+		String max = Collections.max(list);
+		System.out.println(max);
+		System.out.println(sortByValues + "sortByValues" + values);
+		for (Entry<String, String> entry : sortByValues.entrySet()) {
+			if(entry.getValue().equals(max))
+				System.out.println(entry);
+		}
 	}
+	
+	public static <K extends Comparable,V extends Comparable> Map<K,V> sortByValues(Map<K,V> map){
+        List<Map.Entry<K,V>> entries = new LinkedList<Map.Entry<K,V>>(map.entrySet());
+        Collections.sort(entries, new Comparator<Map.Entry<K,V>>() {
+
+            public int compare(Entry<K, V> o1, Entry<K, V> o2) {
+                return o1.getValue().compareTo(o2.getValue());//this is descending..if u change it to o2.getValue().compareTo(o1.getValue()),it is asc
+            }
+        });
+     
+        Map<K,V> sortedMap = new LinkedHashMap<K,V>();
+        for(Map.Entry<K,V> entry: entries){
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+     
+        return sortedMap;
+    }
+
 }
