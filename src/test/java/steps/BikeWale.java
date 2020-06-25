@@ -116,7 +116,7 @@ public class BikeWale {
         Collections.sort(entries, new Comparator<Map.Entry<K,V>>() {
 
             public int compare(Entry<K, V> o1, Entry<K, V> o2) {
-                return o1.getValue().compareTo(o2.getValue());//this is descending..if u change it to o2.getValue().compareTo(o1.getValue()),it is asc
+                return o1.getValue().compareTo(o2.getValue());
             }
         });
      
